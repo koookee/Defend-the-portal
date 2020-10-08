@@ -8,12 +8,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //private GameManager GameManagerScript;
-    private float vertical = 0f;
-    private float horizontal = 0f;
     private Rigidbody playerRB;
     private float playerSpeed = 2.0f;
     private float jumpForce = 5.0f;
-    public int numOfJumps = 1;
+    public int numOfJumps = 2;
     private int jumpsLeft;
     private int rotateSpeed = 9 * 100;
     private bool isOnGround;
@@ -85,10 +83,11 @@ public class PlayerController : MonoBehaviour
     private void MoveFunc()
     {
         //Makes the player move left and right
-        vertical = Input.GetAxis("Vertical");
-        horizontal = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.forward * Time.deltaTime * vertical * playerSpeed);
-        transform.Translate(Vector3.right * Time.deltaTime * horizontal * playerSpeed);
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
+        //normalized prevents player at moving at twice the speed diagonally 
+        transform.Translate(playerMovement, Space.Self);
     }
     private void RotatePlayer()
     {
