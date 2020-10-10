@@ -7,19 +7,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //private GameManager GameManagerScript;
+    public Camera mainCamera;
     private Rigidbody playerRB;
     private float playerSpeed = 2.0f;
     private float jumpForce = 5.0f;
     public int numOfJumps = 2;
     private int jumpsLeft;
-    private int rotateSpeed = 9 * 100;
-    private bool isOnGround;
     public int health = 10;
-    private bool isMaxOnHealth = true;
-    public AudioSource[] AudioClips;
-    public int rocketAmmo = 5;
-    public TextMeshProUGUI ammo;
+    private float weaponRange = 50f;
     //Inventory arr
     public string[] inventory = new string[] {"Gun","empty", "empty" , "empty" , "empty" };
     public string inventorySlotSelected = "";
@@ -43,7 +38,7 @@ public class PlayerController : MonoBehaviour
         MoveFunc();
         JumpFunc();
         InventorySelector();
-        Health();
+        ShootingFunc();
     }
 
     
@@ -60,15 +55,23 @@ public class PlayerController : MonoBehaviour
         //Checks to see if player is on the ground to reset doubleJump to 2
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isOnGround = true;
             jumpsLeft = numOfJumps;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void ShootingFunc()
     {
-        if (collision.gameObject.tag == "Ground") isOnGround = false;
+        //Allows the player to damage enemies
+        if (Input.GetButtonDown("Fire1"))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, weaponRange))
+            {
+                EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
+                //Checks to see if the gameobject is an enemy/has EnemyScript as a component
+                if (enemy != null) enemy.TakeDamage(1);
+            }
+        }
     }
-
     private void JumpFunc()
     {
         //Takes the input to make the player jump
@@ -122,12 +125,5 @@ public class PlayerController : MonoBehaviour
             GameManagerScript.selectedUI[inventorySlotNum + 1].SetActive(false);
         }
         */
-    }
-    private void Health()
-    {
-        //Checks to see if health is 5 to set isMaxOnHealth to true
-        //This prevents the player from going over 10 HP
-        if (health == 5) isMaxOnHealth = true;
-        else isMaxOnHealth = false;
     }
 }
