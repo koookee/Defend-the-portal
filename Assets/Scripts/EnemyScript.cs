@@ -47,10 +47,23 @@ public class EnemyScript : MonoBehaviour
             //which causes a bug
             agent.SetDestination(player.transform.position);
         }
-        else
+        else if (distance <= attackRange)
         {
             //If enemy is in combat range, they look at the player
             LookAtPlayer();
+        }
+        else
+        {
+            //If player is not in range, enemy will target portal
+            MoveToPortal();
+        }
+    }
+    private void MoveToPortal()
+    {
+        if (isAlive)
+        {
+            //Moves enemy to portal
+            agent.SetDestination(GameObject.Find("Portal").transform.position);
         }
     }
     private void LookAtPlayer()

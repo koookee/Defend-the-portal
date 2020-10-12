@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     public Camera mainCamera;
     private Rigidbody playerRB;
+    private int numOfRocks = 0;
     private float playerSpeed = 2.0f;
     private float jumpForce = 5.0f;
     public int numOfJumps = 2;
     private int jumpsLeft;
     public int health = 10;
     private float weaponRange = 50f;
+    public float axeRange = 70f;
+    private bool gunEquipped = true;
     //Inventory arr
     public string[] inventory = new string[] {"Gun","empty", "empty" , "empty" , "empty" };
     public string inventorySlotSelected = "";
@@ -38,7 +41,18 @@ public class PlayerController : MonoBehaviour
         MoveFunc();
         JumpFunc();
         InventorySelector();
-        ShootingFunc();
+        if (gunEquipped)
+        {
+            ShootingFunc();
+        }
+        else HarvestingFunc();
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gunEquipped = false;
+            Debug.Log(gunEquipped);
+        }
+        
     }
 
     
@@ -69,6 +83,26 @@ public class PlayerController : MonoBehaviour
                 EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
                 //Checks to see if the gameobject is an enemy/has EnemyScript as a component
                 if (enemy != null) enemy.TakeDamage(1);
+            }
+        }
+    }
+    private void HarvestingFunc()
+    {
+        //Allows the player to damage enemies
+        if (Input.GetButtonDown("Fire1"))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, axeRange))
+            {
+                WorldObjects rock = hit.transform.GetComponent<WorldObjects>();
+                //Checks to see if the gameobject is an enemy/has EnemyScript as a component
+                if (rock != null)
+                {
+                    rock.TakeDamage();
+                    numOfRocks++;
+                    Debug.Log(numOfRocks);
+                }
+
             }
         }
     }
