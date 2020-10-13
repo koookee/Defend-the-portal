@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     private Rigidbody playerRB;
     private int numOfRocks = 0;
+    private int numOfWood = 0;
     private float playerSpeed = 2.0f;
     private float jumpForce = 5.0f;
     public int numOfJumps = 2;
@@ -41,18 +42,13 @@ public class PlayerController : MonoBehaviour
         MoveFunc();
         JumpFunc();
         InventorySelector();
+        CheckPlayerHealth();
         if (gunEquipped)
         {
             ShootingFunc();
         }
         else HarvestingFunc();
-        
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            gunEquipped = false;
-            Debug.Log(gunEquipped);
-        }
-        
+        ItemSelected();
     }
 
     
@@ -94,13 +90,27 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, axeRange))
             {
-                WorldObjects rock = hit.transform.GetComponent<WorldObjects>();
+                WorldObjects worldObject = hit.transform.GetComponent<WorldObjects>();
                 //Checks to see if the gameobject is an enemy/has EnemyScript as a component
-                if (rock != null)
+                if (worldObject != null)
                 {
-                    rock.TakeDamage();
-                    numOfRocks++;
-                    Debug.Log(numOfRocks);
+                    switch (worldObject.objectName)
+                    {
+                        case ("Rock"):
+                            worldObject.TakeDamage();
+                            numOfRocks++;
+                            Debug.Log("Rocks: " + numOfRocks);
+                            break;
+                        case ("Tree"):
+                            worldObject.TakeDamage();
+                            numOfWood++;
+                            Debug.Log("Wood: " + numOfWood);
+                            break;
+                        default:
+                            Debug.Log("Can't find object type");
+                            break;
+                    }
+                    
                 }
 
             }
@@ -125,6 +135,26 @@ public class PlayerController : MonoBehaviour
         Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
         //normalized prevents player at moving at twice the speed diagonally 
         transform.Translate(playerMovement, Space.Self);
+    }
+    private void ItemSelected()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gunEquipped = false;
+            Debug.Log("Harvesting tool equipped");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gunEquipped = true;
+            Debug.Log("Gun equipped");
+        }
+    }
+    private void CheckPlayerHealth()
+    {
+        if(health <= 0)
+        {
+            Debug.Log("Player has died!");
+        }
     }
     private void RotatePlayer()
     {

@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d97e3a54f91524ea7cf6a5b9ce3b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectName: Rock
+  health: 300
 --- !u!54 &3275462540521794648
 Rigidbody:
   m_ObjectHideFlags: 0

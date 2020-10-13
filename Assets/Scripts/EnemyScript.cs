@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,8 @@ public class EnemyScript : MonoBehaviour
     private float detectionRange = 7f;
     private float attackRange = 1.5f;
     private bool isAlive = true;
+    private float attackSpeed = 1f; //1 attacks per second
+    private float attackCooldown = 0f; //Updates with Time.time
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damageTook)
     {
         health -= damageTook;
+        Debug.Log("Enemy health: " + health);
     }
     private void CheckHealth()
     {
@@ -51,6 +55,7 @@ public class EnemyScript : MonoBehaviour
         {
             //If enemy is in combat range, they look at the player
             LookAtPlayer();
+            AttackPlayer(attackSpeed);
         }
         else
         {
@@ -72,6 +77,18 @@ public class EnemyScript : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+    private void AttackPlayer(float attackSpeed)
+    {
+        //Play attack animation
+        //Wait until animation is over to do damage
+        if (Time.time > attackCooldown)
+        {
+            player.health--;
+            attackCooldown = Time.time + 1 / attackSpeed;
+            Debug.Log("Player health: " + player.health);
+        }
+        
     }
     private void OnDrawGizmosSelected()
     {
