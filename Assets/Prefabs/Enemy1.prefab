@@ -176,8 +176,9 @@ GameObject:
   - component: {fileID: 2113589393235884281}
   - component: {fileID: 3427101945309708116}
   - component: {fileID: 3427101945309708112}
+  - component: {fileID: 3427101946136318367}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,3 +263,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3427101946136318367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427101945309708117}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d15366d71f1314438f6de245f1777b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
