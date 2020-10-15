@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorldObjects : MonoBehaviour
 {
     public string objectName;
-    public int health = 300; //rock health
+    public int health;
     // Start is called before the first frame update
     void Start()
     {

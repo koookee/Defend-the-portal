@@ -20,13 +20,11 @@ public class PlayerController : MonoBehaviour
     public float axeRange = 70f;
     private bool gunEquipped = true;
     //Inventory arr
-    public string[] inventory = new string[] {"Gun","empty", "empty" , "empty" , "empty" };
+    private string[] inventory = new string[] {"Harvesting tool","Gun", "empty" , "empty" , "empty" };
     public string inventorySlotSelected = "";
     private int inventorySlotNum = 0; //inventorySlotNum is basically just the inventory array index
     public int availableSlotNum = 1; //The index of the available slot to be occupied by purchased weapons
     
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +41,8 @@ public class PlayerController : MonoBehaviour
         JumpFunc();
         InventorySelector();
         CheckPlayerHealth();
-        if (gunEquipped)
-        {
-            ShootingFunc();
-        }
-        else HarvestingFunc();
-        ItemSelected();
+        ShootingFunc();
+        HarvestingFunc();
     }
 
     
@@ -71,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private void ShootingFunc()
     {
         //Allows the player to damage enemies
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && inventorySlotSelected == "Gun")
         {
             RaycastHit hit;
             if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, weaponRange))
@@ -85,7 +79,7 @@ public class PlayerController : MonoBehaviour
     private void HarvestingFunc()
     {
         //Allows the player to damage enemies
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && inventorySlotSelected == "Harvesting tool")
         {
             RaycastHit hit;
             if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, axeRange))
@@ -136,6 +130,7 @@ public class PlayerController : MonoBehaviour
         //normalized prevents player at moving at twice the speed diagonally 
         transform.Translate(playerMovement, Space.Self);
     }
+    /*
     private void ItemSelected()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -149,6 +144,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Gun equipped");
         }
     }
+    */
     private void CheckPlayerHealth()
     {
         if(health <= 0)
@@ -159,7 +155,7 @@ public class PlayerController : MonoBehaviour
     private void RotatePlayer()
     {
         /*
-        //If inventory is open, player can't rotate
+        //If inventory is open, player can't rotate or move
         if (!GameManagerScript.inventoryUI.activeSelf)
         {
             //Rotates player around the Y axis
@@ -171,23 +167,25 @@ public class PlayerController : MonoBehaviour
     
     private void InventorySelector()
     {
-        /*
+        
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && inventorySlotNum < inventory.Length - 1)
         {
             inventorySlotNum++;
             inventorySlotSelected = inventory[inventorySlotNum];
-            Debug.Log(inventorySlotNum); Debug.Log(inventorySlotSelected);
-            GameManagerScript.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
-            GameManagerScript.selectedUI[inventorySlotNum - 1].SetActive(false);//Turns off the border of the previously selected slot
+            //Debug.Log(inventorySlotNum);
+            Debug.Log(inventorySlotSelected);
+            //GameManagerScript.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
+            //GameManagerScript.selectedUI[inventorySlotNum - 1].SetActive(false);//Turns off the border of the previously selected slot
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f && inventorySlotNum > 0)
         {
             inventorySlotNum--;
             inventorySlotSelected = inventory[inventorySlotNum];
-            Debug.Log(inventorySlotNum); Debug.Log(inventorySlotSelected);
-            GameManagerScript.selectedUI[inventorySlotNum].SetActive(true);
-            GameManagerScript.selectedUI[inventorySlotNum + 1].SetActive(false);
+            //Debug.Log(inventorySlotNum);
+            Debug.Log(inventorySlotSelected);
+            //GameManagerScript.selectedUI[inventorySlotNum].SetActive(true);
+            //GameManagerScript.selectedUI[inventorySlotNum + 1].SetActive(false);
         }
-        */
+        
     }
 }
