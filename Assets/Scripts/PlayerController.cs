@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameManagerUI GameUI;
     public Camera mainCamera;
     private Rigidbody playerRB;
     private int numOfRocks = 0;
@@ -18,17 +19,17 @@ public class PlayerController : MonoBehaviour
     public int health = 10;
     private float weaponRange = 50f;
     public float axeRange = 70f;
-    private bool gunEquipped = true;
     //Inventory arr
-    private string[] inventory = new string[] {"Harvesting tool","Gun", "empty" , "empty" , "empty" };
+    public string[] inventory = new string[] {"Harvesting tool","Gun", "empty" , "empty" , "empty" };
     public string inventorySlotSelected = "";
-    private int inventorySlotNum = 0; //inventorySlotNum is basically just the inventory array index
+    public int inventorySlotNum = 0; //inventorySlotNum is basically just the inventory array index
     public int availableSlotNum = 1; //The index of the available slot to be occupied by purchased weapons
     
     // Start is called before the first frame update
     void Start()
     {
         //GameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
         inventorySlotSelected = inventory[inventorySlotNum];
         playerRB = GetComponent<Rigidbody>();
     }
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
         MoveFunc();
         JumpFunc();
-        InventorySelector();
+        HotbarSelector();
         CheckPlayerHealth();
         ShootingFunc();
         HarvestingFunc();
@@ -165,27 +166,28 @@ public class PlayerController : MonoBehaviour
         */
     }
     
-    private void InventorySelector()
+    private void HotbarSelector()
     {
-        
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && inventorySlotNum < inventory.Length - 1)
         {
             inventorySlotNum++;
             inventorySlotSelected = inventory[inventorySlotNum];
-            //Debug.Log(inventorySlotNum);
-            Debug.Log(inventorySlotSelected);
-            //GameManagerScript.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
-            //GameManagerScript.selectedUI[inventorySlotNum - 1].SetActive(false);//Turns off the border of the previously selected slot
+
+            //GameUI part
+            GameUI.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
+            GameUI.selectedUI[inventorySlotNum - 1].SetActive(false); //Turns off the border of the previously selected slot
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f && inventorySlotNum > 0)
         {
             inventorySlotNum--;
             inventorySlotSelected = inventory[inventorySlotNum];
-            //Debug.Log(inventorySlotNum);
-            Debug.Log(inventorySlotSelected);
-            //GameManagerScript.selectedUI[inventorySlotNum].SetActive(true);
-            //GameManagerScript.selectedUI[inventorySlotNum + 1].SetActive(false);
+
+            //GameUI part
+            GameUI.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
+            GameUI.selectedUI[inventorySlotNum + 1].SetActive(false); //Turns off the border of the previously selected slot
         }
-        
+
     }
+    
 }

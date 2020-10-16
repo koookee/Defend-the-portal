@@ -73,7 +73,6 @@ public class EnemyScript : MonoBehaviour
                 agent.SetDestination(portal.transform.position);
                 if (distanceToPortal <= attackRange)
                 {
-                    Debug.Log("Im in");
                     Attack(attackSpeed,"Portal");
                 }
             }
