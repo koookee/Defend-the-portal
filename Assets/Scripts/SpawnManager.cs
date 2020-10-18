@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameManager GameManagerScript;
 
     //Rounds:
-    public int roundCounter = 1; //Increments as game progresses
+    public int roundCounter = 0; //Increments as game progresses
 
     // Start is called before the first frame update
     void Start()

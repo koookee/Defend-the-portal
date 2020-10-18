@@ -344,6 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9eedca9711ee2548b59d71446b329f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numEnemiesTargetingPlayer: 0
+  maxNumEnemiesTargetingPlayer: 3
 --- !u!1001 &32277527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8558,6 +8560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1660025076}
   - component: {fileID: 1660025075}
+  - component: {fileID: 1660025079}
   - component: {fileID: 1660025078}
   - component: {fileID: 1660025077}
   m_Layer: 0
@@ -8583,7 +8586,7 @@ MonoBehaviour:
   - {fileID: 3427101945309708117, guid: eeb461ce0605f2345ae6c29d279ee134, type: 3}
   PlayerControllerScript: {fileID: 0}
   GameManagerScript: {fileID: 0}
-  roundCounter: 1
+  roundCounter: 0
 --- !u!4 &1660025076
 Transform:
   m_ObjectHideFlags: 0
@@ -8619,12 +8622,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660025074}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3591e64114b71a5468ee59c7437195e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeRoundStarts: 5
+  roundNum: 0
+--- !u!114 &1660025079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660025074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a4927de8b9cb94fa015e8c2045c49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   roundNum: 0
 --- !u!1001 &1676877569
 PrefabInstance:

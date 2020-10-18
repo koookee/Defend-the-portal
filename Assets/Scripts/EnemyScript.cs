@@ -9,12 +9,14 @@ public class EnemyScript : MonoBehaviour
     private NavMeshAgent agent;
     private PlayerController player;
     private PortalScript portal;
+    private GameManager GameManagerScript;
     private int health = 5;
-    private float detectionRange = 7f;
+    private float detectionRange = 999f; //Detection range is the entire map
     private float attackRange; //attack range is dependant on the stopping distance
     private bool isAlive = true;
     private float attackSpeed = 1f; //1 attacks per second
     private float attackCooldown = 0f; //Updates with Time.time
+    private bool shouldTargetPlayer = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class EnemyScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         portal = GameObject.Find("Portal").GetComponent<PortalScript>();
+        GameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         attackRange = agent.stoppingDistance;
     }
 
@@ -30,6 +33,7 @@ public class EnemyScript : MonoBehaviour
     {
         CheckHealth();
         MoveToTarget();
+        ShouldTargetPlayer();
     }
     public void TakeDamage(int damageTook)
     {
@@ -41,6 +45,8 @@ public class EnemyScript : MonoBehaviour
         if (health <= 0)
         {
             isAlive = false;
+            //If enemy is currently targeting player and they die, it decrements number of enemies targeting player
+            if (shouldTargetPlayer) GameManagerScript.numEnemiesTargetingPlayer--; 
             Destroy(gameObject);
         }
     }
@@ -54,14 +60,14 @@ public class EnemyScript : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             float distanceToPortal = Vector3.Distance(portal.transform.position, transform.position);
 
-            if (distanceToPlayer <= detectionRange && distanceToPlayer >= attackRange)
+            if (distanceToPlayer <= detectionRange && distanceToPlayer >= attackRange && shouldTargetPlayer)
             {
                 //Moves enemy to player
                 //Reason as to why I added isAlive is so that it doesn't execute after the enemy is dead
                 //which causes a bug
                 agent.SetDestination(player.transform.position);
             }
-            else if (distanceToPlayer <= attackRange)
+            else if (distanceToPlayer <= attackRange && shouldTargetPlayer)
             {
                 //If enemy is in combat range, they look at the player
                 LookAtPlayer();
@@ -98,6 +104,18 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("Portal health: " + portal.health);
         }
 
+    }
+    private void ShouldTargetPlayer()
+        //Checks if the enemy should target the player or go straight to the portal
+        //If the maximum number of enemies targeting player hasn't been reached, the
+        //current enemy will target the player
+        //Also checks if the enemy is currently targeting the player
+    {
+        if(GameManagerScript.numEnemiesTargetingPlayer < GameManagerScript.maxNumEnemiesTargetingPlayer && !shouldTargetPlayer)
+        {
+            shouldTargetPlayer = true;
+            GameManagerScript.numEnemiesTargetingPlayer++;
+        }
     }
     private void OnDrawGizmosSelected()
     {

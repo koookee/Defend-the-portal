@@ -32,7 +32,7 @@ public class Round2 : MonoBehaviour
                 nextRound = GetComponent<Round2>(); //Change to round 3
                 SpawnManagerScript.roundCounter++;
                 nextRound.enabled = true;
-                //Script turns itself off after its purpose is complete
+                //Turns off script when round is over
                 enabled = false;
             }
         }

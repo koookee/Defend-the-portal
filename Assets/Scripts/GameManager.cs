@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int numEnemiesTargetingPlayer; // The number of enemies targeting the player
+    public int maxNumEnemiesTargetingPlayer = 3; //Maximum number of enemies that should target the player
     // Start is called before the first frame update
     void Start()
     {
