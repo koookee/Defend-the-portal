@@ -9,10 +9,14 @@ public class GameManagerUI : MonoBehaviour
 {
     private PlayerController Player;
     private SpawnManager SpawnManagerScript;
-
+    //Crafting UI
+    public GameObject craftingUI;
+    public bool isCraftingUIActive = false;
+    public bool gunPurchased = false;
+    public GameObject gunImage;
+    public GameObject gunPrice;
     //Hotbar UI
     public Sprite gunSprite;
-    public Sprite rocketLauncherSprite;
     public UnityEngine.UI.Image[] slotsUI; //Images for each hotbar slot
     public GameObject[] selectedUI; //Border around each hotbar slot. They're changed in the player controller script
 
@@ -21,6 +25,10 @@ public class GameManagerUI : MonoBehaviour
     {
         SpawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        slotsUI[1].enabled = false; //Turns off the image component of the empty slots
+        slotsUI[2].enabled = false;
+        slotsUI[3].enabled = false;
+        slotsUI[4].enabled = false;
     }
 
     // Update is called once per frame
@@ -33,15 +41,11 @@ public class GameManagerUI : MonoBehaviour
     {
         if (Player.inventorySlotSelected == "Gun")
         {
-            //rayGunImage.SetActive(true);
-            //rocketLauncherImage.SetActive(false);
-            //Player.ammo.text = "Ammo: Infinite";
+            
         }
         if (Player.inventorySlotSelected == "Rocket Launcher")
         {
-            //rocketLauncherImage.SetActive(true);
-            //rayGunImage.SetActive(false);
-            //Player.ammo.text = "Ammo: " + Player.rocketAmmo;
+            
         }
     }
 
@@ -51,17 +55,17 @@ public class GameManagerUI : MonoBehaviour
     public TextMeshProUGUI playerHealthText;
     public TextMeshProUGUI roundNum;
     public TextMeshProUGUI roundsSurvived;
-    public bool isCraftingUIActive = false;
-    public GameObject craftingUI;
+    
+    
     public GameObject rocketCheckmarkImage;
-    public GameObject rocketPrice;
-    private bool rocketPurchased = false;
+    
+    
 
     //Using Image instead of GameObject doesn't make it show up in the GameManager
     //game object like TextMeshProUGUI does
 
     public GameObject rayGunImage;
-    public GameObject rocketLauncherImage;
+    
     public GameObject crossHair;
     public GameObject weaponsUI;
     public GameObject restartButton;
@@ -80,10 +84,7 @@ public class GameManagerUI : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         //Keeps the mouse in the playmode area
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
-        slotsUI[1].enabled = false; //Turns off the image component of the empty slots
-        slotsUI[2].enabled = false;
-        slotsUI[3].enabled = false;
-        slotsUI[4].enabled = false;
+        
 
     }
 

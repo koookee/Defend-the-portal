@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private GameManagerUI GameManagerUIScript;
+    private PlayerController Player;
     public int numEnemiesTargetingPlayer; // The number of enemies targeting the player
     public int maxNumEnemiesTargetingPlayer = 3; //Maximum number of enemies that should target the player
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        GameManagerUIScript = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
     }
 
     // Update is called once per frame
@@ -18,23 +21,24 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    /*
-     * public void BuyWeapon(int weaponType)
+    public void BuyWeapon(int weaponType)
     {
-        //Type 0 is rocket launcher
-        if (weaponType == 0 && !rocketPurchased && Player.gems >= 300)
+        //Type 0 is standard gun
+        if (weaponType == 0 && !GameManagerUIScript.gunPurchased && Player.numOfWood >= 10)
         {
-            Player.gems -= 300;
-            rocketPrice.SetActive(false);
-            rocketCheckmarkImage.SetActive(true);
-            rocketPurchased = true;
-            Player.inventory[Player.availableSlotNum] = "Rocket Launcher";
-            slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
-            slotsUI[Player.availableSlotNum].sprite = rocketLauncherSprite; //sets the image to the rocket sprite
+            Player.numOfWood -= 10;
+            //GameManagerUIScript.gunPrice.SetActive(false);
+            //gunCheckmarkImage.SetActive(true);
+            GameManagerUIScript.gunPurchased = true;
+            Player.inventory[Player.availableSlotNum] = "Gun";
+            GameManagerUIScript.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
+            GameManagerUIScript.slotsUI[Player.availableSlotNum].sprite = GameManagerUIScript.gunSprite; //sets the image to the rocket sprite
             Player.availableSlotNum++; //Moves the index of the available slot to the one after it
             //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
         }
     }
+    /*
+     * 
     public void BuyAmmo(int weaponType)
     {
         //Type 0 is rocket ammo
