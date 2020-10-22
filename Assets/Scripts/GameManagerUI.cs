@@ -4,17 +4,20 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEditor.UI;
 
 public class GameManagerUI : MonoBehaviour
 {
     private PlayerController Player;
     private SpawnManager SpawnManagerScript;
     //Crafting UI
+    public bool isCraftingToggled = false;
     public GameObject craftingUI;
     public bool isCraftingUIActive = false;
-    public bool gunPurchased = false;
+    public bool gunPurchased = false;           //Gun
     public GameObject gunImage;
     public GameObject gunPrice;
+    public GameObject gunCheckmark; 
     //Hotbar UI
     public Sprite gunSprite;
     public UnityEngine.UI.Image[] slotsUI; //Images for each hotbar slot
@@ -25,10 +28,18 @@ public class GameManagerUI : MonoBehaviour
     {
         SpawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         slotsUI[1].enabled = false; //Turns off the image component of the empty slots
         slotsUI[2].enabled = false;
         slotsUI[3].enabled = false;
         slotsUI[4].enabled = false;
+    }
+    public void ToggleCraftingUI()
+    {
+        isCraftingToggled = !isCraftingToggled;
+        craftingUI.SetActive(isCraftingToggled);
+        UnityEngine.Cursor.visible = isCraftingToggled;
     }
 
     // Update is called once per frame
@@ -98,11 +109,7 @@ public class GameManagerUI : MonoBehaviour
     }
 
     
-    public void CloseCraftingUI()
-    {
-        inventoryUI.SetActive(false);
-        UnityEngine.Cursor.visible = false;
-    }
+    
     
     private void roundUI()
     {

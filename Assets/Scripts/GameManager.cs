@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private GameManagerUI GameManagerUIScript;
+    private GameManagerUI GameUI;
     private PlayerController Player;
     public int numEnemiesTargetingPlayer; // The number of enemies targeting the player
     public int maxNumEnemiesTargetingPlayer = 3; //Maximum number of enemies that should target the player
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
-        GameManagerUIScript = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
+        GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
     }
 
     // Update is called once per frame
@@ -24,15 +24,15 @@ public class GameManager : MonoBehaviour
     public void BuyWeapon(int weaponType)
     {
         //Type 0 is standard gun
-        if (weaponType == 0 && !GameManagerUIScript.gunPurchased && Player.numOfWood >= 10)
+        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfWood >= 10)
         {
             Player.numOfWood -= 10;
             //GameManagerUIScript.gunPrice.SetActive(false);
-            //gunCheckmarkImage.SetActive(true);
-            GameManagerUIScript.gunPurchased = true;
+            GameUI.gunCheckmark.SetActive(true);
+            GameUI.gunPurchased = true;
             Player.inventory[Player.availableSlotNum] = "Gun";
-            GameManagerUIScript.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
-            GameManagerUIScript.slotsUI[Player.availableSlotNum].sprite = GameManagerUIScript.gunSprite; //sets the image to the rocket sprite
+            GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
+            GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.gunSprite; //sets the image to the rocket sprite
             Player.availableSlotNum++; //Moves the index of the available slot to the one after it
             //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
         }

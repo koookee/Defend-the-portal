@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
         CheckPlayerHealth();
         ShootingFunc();
         HarvestingFunc();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameUI.ToggleCraftingUI();
+        }
     }
 
     
@@ -124,12 +128,15 @@ public class PlayerController : MonoBehaviour
     
     private void MoveFunc()
     {
-        //Makes the player move left and right
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
-        Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
-        //normalized prevents player at moving at twice the speed diagonally 
-        transform.Translate(playerMovement, Space.Self);
+        if (!GameUI.isCraftingToggled) //Player can move only if the crafting UI isn't visible 
+        {
+            //Makes the player move left and right
+            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
+            Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
+            //normalized prevents player at moving at twice the speed diagonally 
+            transform.Translate(playerMovement, Space.Self);
+        }
     }
     /*
     private void ItemSelected()
@@ -189,5 +196,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    
     
 }
