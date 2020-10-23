@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour
     private float weaponRange = 50f;
     public float axeRange = 70f;
     //Inventory arr
-    public string[] inventory = new string[] {"Harvesting tool","Gun", "empty" , "empty" , "empty" };
+    public string[] inventory = new string[] { "Harvesting tool", "Gun", "empty", "empty", "empty" };
     public string inventorySlotSelected = "";
     public int inventorySlotNum = 0; //inventorySlotNum is basically just the inventory array index
+    private int previousInventorySlotNum = 0; //Index of the previous slot num
     public int availableSlotNum = 1; //The index of the available slot to be occupied by purchased weapons
-    
+    private KeyCode[] numKeypadArr = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5}; //Key codes of the first 5 numbers
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,20 +39,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
         MoveFunc();
         JumpFunc();
         HotbarSelector();
         CheckPlayerHealth();
         ShootingFunc();
         HarvestingFunc();
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            GameUI.ToggleCraftingUI();
-        }
+        ToggleCraftingUI();
     }
 
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
@@ -109,7 +107,7 @@ public class PlayerController : MonoBehaviour
                             Debug.Log("Can't find object type");
                             break;
                     }
-                    
+
                 }
 
             }
@@ -124,8 +122,8 @@ public class PlayerController : MonoBehaviour
             jumpsLeft -= 1;
         }
     }
-    
-    
+
+
     private void MoveFunc()
     {
         if (!GameUI.isCraftingToggled) //Player can move only if the crafting UI isn't visible 
@@ -138,64 +136,67 @@ public class PlayerController : MonoBehaviour
             transform.Translate(playerMovement, Space.Self);
         }
     }
-    /*
-    private void ItemSelected()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            gunEquipped = false;
-            Debug.Log("Harvesting tool equipped");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            gunEquipped = true;
-            Debug.Log("Gun equipped");
-        }
-    }
-    */
     private void CheckPlayerHealth()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             Debug.Log("Player has died!");
         }
     }
-    private void RotatePlayer()
-    {
-        /*
-        //If inventory is open, player can't rotate or move
-        if (!GameManagerScript.inventoryUI.activeSelf)
-        {
-            //Rotates player around the Y axis
-            float horizontalInput = Input.GetAxis("Mouse X");
-            transform.Rotate(Vector3.up, horizontalInput * Time.deltaTime * rotateSpeed);
-        }
-        */
-    }
-    
-    private void HotbarSelector()
-    {
 
+    private void HotbarSelector() //Calls both methods that navigate the hotbar
+    {
+        HotbarScrollWheel();
+        HotbarNumPad();
+    }
+    private void HotbarScrollWheel() //Moves between slots using scroll wheel
+    {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f && inventorySlotNum < inventory.Length - 1)
         {
+            previousInventorySlotNum = inventorySlotNum;
             inventorySlotNum++;
             inventorySlotSelected = inventory[inventorySlotNum];
 
             //GameUI part
             GameUI.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
-            GameUI.selectedUI[inventorySlotNum - 1].SetActive(false); //Turns off the border of the previously selected slot
+            GameUI.selectedUI[previousInventorySlotNum].SetActive(false); //Turns off the border of the previously selected slot
+            previousInventorySlotNum = inventorySlotNum;
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f && inventorySlotNum > 0)
         {
+            previousInventorySlotNum = inventorySlotNum;
             inventorySlotNum--;
             inventorySlotSelected = inventory[inventorySlotNum];
 
             //GameUI part
             GameUI.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
-            GameUI.selectedUI[inventorySlotNum + 1].SetActive(false); //Turns off the border of the previously selected slot
+            GameUI.selectedUI[previousInventorySlotNum].SetActive(false); //Turns off the border of the previously selected slot
+            previousInventorySlotNum = inventorySlotNum;
+        }
+    }
+    private void HotbarNumPad() //Moves between slots using the number pad
+    {
+        for (int i = 0; i < numKeypadArr.Length; i++)
+        {
+            if (Input.GetKeyDown(numKeypadArr[i]))
+            {
+                inventorySlotNum = i;
+                inventorySlotSelected = inventory[inventorySlotNum];
+
+                //GameUI part
+                GameUI.selectedUI[inventorySlotNum].SetActive(true); //Moves the slot border to the new selected slot
+                if(inventorySlotNum != previousInventorySlotNum)GameUI.selectedUI[previousInventorySlotNum].SetActive(false); //Turns off the border of the previously selected slot
+                previousInventorySlotNum = i;
+            }
         }
 
     }
-    
-    
+    private void ToggleCraftingUI()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameUI.ToggleCraftingUI();
+        }
+    }
+
 }
