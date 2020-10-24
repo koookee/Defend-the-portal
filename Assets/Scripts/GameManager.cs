@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     public void BuyWeapon(int weaponType)
     {
         //Type 0 is standard gun
-        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfWood >= 10)
+        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20)
         {
-            Player.numOfWood -= 10;
+            Player.numOfMetal -= 20;
             //GameManagerUIScript.gunPrice.SetActive(false);
             GameUI.gunCheckmark.SetActive(true);
             GameUI.gunPurchased = true;

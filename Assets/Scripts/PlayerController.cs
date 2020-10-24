@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRB;
     public int numOfRocks = 0;
     public int numOfWood = 0;
-    private float playerSpeed = 2.0f;
-    private float jumpForce = 5.0f;
+    public int numOfMetal = 0;
+    private float playerSpeed = 3.0f;
+    private float jumpForce = 4.0f;
     public int numOfJumps = 2;
     private int jumpsLeft;
     public int health = 10;
@@ -102,6 +103,11 @@ public class PlayerController : MonoBehaviour
                             worldObject.TakeDamage();
                             numOfWood++;
                             Debug.Log("Wood: " + numOfWood);
+                            break;
+                        case ("Truck"):
+                            worldObject.TakeDamage();
+                            numOfMetal++;
+                            Debug.Log("Metal: " + numOfMetal);
                             break;
                         default:
                             Debug.Log("Can't find object type");
