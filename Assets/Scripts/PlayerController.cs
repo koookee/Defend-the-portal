@@ -138,8 +138,12 @@ public class PlayerController : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             float horizontal = Input.GetAxis("Horizontal");
             Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
-            //normalized prevents player at moving at twice the speed diagonally 
+            ////normalized prevents player at moving at twice the speed diagonally 
             transform.Translate(playerMovement, Space.Self);
+            //playerRB.AddForce(playerMovement * 5,ForceMode.VelocityChange);
+            //Vector3 velocityVector = playerMovement.normalized * 3;
+            //playerRB.velocity = (velocityVector);
+            //Debug.Log(playerRB.velocity);
         }
     }
     private void CheckPlayerHealth()

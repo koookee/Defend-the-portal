@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: -8585949692769822602}
   - component: {fileID: 8632600965467491375}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: Tree_old
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
