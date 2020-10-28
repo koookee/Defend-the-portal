@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private GameManagerUI GameUI;
     public Camera mainCamera;
     private Rigidbody playerRB;
-    public int numOfRocks = 0;
+    public int numOfStones = 0;
     public int numOfWood = 0;
     public int numOfMetal = 0;
     private float playerSpeed = 3.0f;
@@ -92,19 +92,19 @@ public class PlayerController : MonoBehaviour
                 //Checks to see if the gameobject is an enemy/has EnemyScript as a component
                 if (worldObject != null)
                 {
-                    switch (worldObject.objectName)
+                    switch (worldObject.type)
                     {
-                        case ("Rock"):
+                        case ("Stone"):
                             worldObject.TakeDamage();
-                            numOfRocks++;
-                            Debug.Log("Rocks: " + numOfRocks);
+                            numOfStones++;
+                            Debug.Log("Stones: " + numOfStones);
                             break;
-                        case ("Tree"):
+                        case ("Wood"):
                             worldObject.TakeDamage();
                             numOfWood++;
                             Debug.Log("Wood: " + numOfWood);
                             break;
-                        case ("Truck"):
+                        case ("Metal"):
                             worldObject.TakeDamage();
                             numOfMetal++;
                             Debug.Log("Metal: " + numOfMetal);

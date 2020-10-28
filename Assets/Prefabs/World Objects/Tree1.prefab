@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Tree
+  type: Wood
   health: 10
 --- !u!64 &4455326453388054214
 MeshCollider:
