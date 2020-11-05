@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float weaponRange = 50f;
     public float axeRange = 70f;
     //Inventory arr
-    public string[] inventory = new string[] { "Harvesting tool", "Gun", "empty", "empty", "empty" };
+    public string[] inventory = new string[] { "Harvesting tool", "empty", "empty", "empty", "empty" };
     public string inventorySlotSelected = "";
     public int inventorySlotNum = 0; //inventorySlotNum is basically just the inventory array index
     private int previousInventorySlotNum = 0; //Index of the previous slot num
