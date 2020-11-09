@@ -100,8 +100,6 @@ public class EnemyScript : MonoBehaviour
             if (objectToAttack == "Player") player.health--;
             else portal.health--;
             attackCooldown = Time.time + 1 / attackSpeed;
-            Debug.Log("Player health: " + player.health);
-            Debug.Log("Portal health: " + portal.health);
         }
 
     }

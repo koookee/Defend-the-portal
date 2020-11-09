@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public int numOfJumps = 2;
     private int jumpsLeft;
     public int health = 10;
-    private float weaponRange = 50f;
     public float axeRange = 70f;
     //Inventory arr
     public string[] inventory = new string[] { "Harvesting tool", "empty", "empty", "empty", "empty" };
@@ -44,7 +43,6 @@ public class PlayerController : MonoBehaviour
         JumpFunc();
         HotbarSelector();
         CheckPlayerHealth();
-        ShootingFunc();
         HarvestingFunc();
         ToggleCraftingUI();
     }
@@ -64,20 +62,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             jumpsLeft = numOfJumps;
-        }
-    }
-    private void ShootingFunc()
-    {
-        //Allows the player to damage enemies
-        if (Input.GetButtonDown("Fire1") && inventorySlotSelected == "Gun")
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, weaponRange))
-            {
-                EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
-                //Checks to see if the gameobject is an enemy/has EnemyScript as a component
-                if (enemy != null) enemy.TakeDamage(1);
-            }
         }
     }
     private void HarvestingFunc()

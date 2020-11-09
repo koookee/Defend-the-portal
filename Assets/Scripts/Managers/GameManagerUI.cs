@@ -14,12 +14,20 @@ public class GameManagerUI : MonoBehaviour
     public bool isCraftingToggled = false;
     public GameObject craftingUI;
     public bool isCraftingUIActive = false;
+
     public bool gunPurchased = false;           //Gun
     public GameObject gunImage;
     public GameObject gunPrice;
-    public GameObject gunCheckmark; 
+    public GameObject gunCheckmark;
+
+    public bool bowPurchased = false;           //Bow
+    public GameObject bowImage;
+    public GameObject bowPrice;
+    public GameObject bowCheckmark;
+
     //Hotbar UI
     public Sprite gunSprite;
+    public Sprite bowSprite;
     public UnityEngine.UI.Image[] slotsUI; //Images for each hotbar slot
     public GameObject[] selectedUI; //Border around each hotbar slot. They're changed in the player controller script
 

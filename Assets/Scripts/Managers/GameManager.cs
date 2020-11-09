@@ -32,7 +32,21 @@ public class GameManager : MonoBehaviour
             GameUI.gunPurchased = true;
             Player.inventory[Player.availableSlotNum] = "Gun";
             GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
-            GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.gunSprite; //sets the image to the rocket sprite
+            GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.gunSprite; //sets the image to the gun sprite
+            Player.availableSlotNum++; //Moves the index of the available slot to the one after it
+            //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
+        }
+
+        //Type 1 is bow
+        if (weaponType == 1 && !GameUI.bowPurchased && Player.numOfWood >= 10)
+        {
+            Player.numOfWood -= 10;
+            //GameManagerUIScript.gunPrice.SetActive(false);
+            GameUI.bowCheckmark.SetActive(true);
+            GameUI.bowPurchased = true;
+            Player.inventory[Player.availableSlotNum] = "Bow";
+            GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
+            GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.bowSprite; //sets the image to the bow sprite
             Player.availableSlotNum++; //Moves the index of the available slot to the one after it
             //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
         }

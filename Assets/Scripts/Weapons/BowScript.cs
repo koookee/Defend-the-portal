@@ -13,7 +13,7 @@ public class BowScript : MonoBehaviour
     private float timeStart; 
 
     private int fireRate = 1; //Number of arrows in a second
-    private float timeToWait = 0f;
+    private float timeToWait = 0f; //Time before player can shhot again. Starts at 0 but constantly changes. 
 
     private int arrowDamage = 1;
 
@@ -32,11 +32,11 @@ public class BowScript : MonoBehaviour
     {
         if (Time.time > timeToWait)
         {
-            if (Input.GetButtonDown("Fire1") && Player.inventorySlotNum == 2)
+            if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Bow")
             {
                 timeStart = Time.time;
             }
-            if (Input.GetButtonUp("Fire1") && Player.inventorySlotNum == 2)
+            if (Input.GetButtonUp("Fire1") && Player.inventorySlotSelected == "Bow")
             {
                 float timeDown = Time.time - timeStart; //Time spent holding down the fire1 button
                 float forceMultiplier = timeDown * 2;
