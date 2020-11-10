@@ -10,25 +10,28 @@ public class GameManagerUI : MonoBehaviour
 {
     private PlayerController Player;
     private SpawnManager SpawnManagerScript;
+
     //Crafting UI
+    public GameObject[] CraftingPanels; //Weapons, ammo, etc.
+    private int panelCurrentIndex = 0; //Index of the current crafting panel
     public bool isCraftingToggled = false;
     public GameObject craftingUI;
     public bool isCraftingUIActive = false;
 
     public bool gunPurchased = false;           //Gun
-    public GameObject gunImage;
+    public GameObject gunImage; //What was this used for again?
     public GameObject gunPrice;
     public GameObject gunCheckmark;
 
     public bool bowPurchased = false;           //Bow
-    public GameObject bowImage;
+    public GameObject bowImage; //What was this used for again?
     public GameObject bowPrice;
     public GameObject bowCheckmark;
 
     //Hotbar UI
     public Sprite gunSprite;
     public Sprite bowSprite;
-    public UnityEngine.UI.Image[] slotsUI; //Images for each hotbar slot
+    public UnityEngine.UI.Image[] slotsUI; //Image components for each hotbar slot
     public GameObject[] selectedUI; //Border around each hotbar slot. They're changed in the player controller script
 
     // Start is called before the first frame update
@@ -48,6 +51,13 @@ public class GameManagerUI : MonoBehaviour
         isCraftingToggled = !isCraftingToggled;
         craftingUI.SetActive(isCraftingToggled);
         UnityEngine.Cursor.visible = isCraftingToggled;
+    }
+
+    public void SwitchCraftingPanel(int direction) //direction is either 1 or -1. 
+    {
+        CraftingPanels[panelCurrentIndex].SetActive(false);
+        panelCurrentIndex += direction;
+        CraftingPanels[panelCurrentIndex].SetActive(true);
     }
 
     // Update is called once per frame

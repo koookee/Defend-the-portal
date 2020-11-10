@@ -44,7 +44,7 @@ public class BowScript : MonoBehaviour
                 if (forceMultiplier <= 1) forceMultiplier = 1; //Min limit for the force multiplier
                 arrowDamage = (int)forceMultiplier;
                 Debug.Log(forceMultiplier);
-                Vector3 spawnPos = transform.position + transform.forward + transform.up * 0.5f;
+                Vector3 spawnPos = transform.position + transform.forward + transform.up * 0.5f + transform.right * 0.25f;
                 GameObject arrow = Instantiate(Arrow, spawnPos, mainCamera.transform.rotation);
                 arrow.GetComponent<Rigidbody>().AddForce(arrow.transform.forward * arrowForce * forceMultiplier, ForceMode.Impulse);
                 arrow.GetComponent<ArrowScript>().damage = arrowDamage;
