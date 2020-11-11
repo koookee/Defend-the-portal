@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     private GameManagerUI GameUI;
     public Camera mainCamera;
     private Rigidbody playerRB;
-    public int numOfStones = 0;
-    public int numOfWood = 0;
-    public int numOfMetal = 0;
+    public int numOfStones = 900; //Change to 0
+    public int numOfWood = 900; //Change to 0
+    public int numOfMetal = 900; //Change to 0
     private float playerSpeed = 3.0f;
     private float jumpForce = 4.0f;
     public int numOfJumps = 2;

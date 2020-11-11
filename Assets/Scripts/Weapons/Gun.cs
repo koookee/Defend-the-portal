@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     private PlayerController Player;
     private ParticleSystem Particles;
     public Camera mainCamera;
+    private GameManagerUI GameUI;
 
     private float range = 40f;
 
@@ -17,6 +18,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
         Particles = GetComponent<ParticleSystem>();
     }
 
@@ -27,7 +29,7 @@ public class Gun : MonoBehaviour
     }
     private void Shoot()
     {
-        if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Gun" && Time.time > timeToWait)
+        if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Gun" && Time.time > timeToWait && !GameUI.isCraftingToggled)
         {
             Particles.Play();
             RaycastHit hit;

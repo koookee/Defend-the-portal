@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private GameManagerUI GameUI;
     private PlayerController Player;
+    private BowScript Bow;
     public int numEnemiesTargetingPlayer; // The number of enemies targeting the player
     public int maxNumEnemiesTargetingPlayer = 3; //Maximum number of enemies that should target the player
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
+        Bow = GameObject.Find("Bow").GetComponent<BowScript>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,31 @@ public class GameManager : MonoBehaviour
             GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.bowSprite; //sets the image to the bow sprite
             Player.availableSlotNum++; //Moves the index of the available slot to the one after it
             //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
+        }
+    }
+    public void BuyAmmo(int ammoType)
+    {
+        /*
+        //Type 0 is standard gun ammo
+        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20)
+        {
+            Player.numOfMetal -= 20;
+            //GameManagerUIScript.gunPrice.SetActive(false);
+            GameUI.gunCheckmark.SetActive(true);
+            GameUI.gunPurchased = true;
+            Player.inventory[Player.availableSlotNum] = "Gun";
+            GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
+            GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.gunSprite; //sets the image to the gun sprite
+            Player.availableSlotNum++; //Moves the index of the available slot to the one after it
+            //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
+        }
+        */
+
+        //Type 1 is arrows
+        if (ammoType == 1 && GameUI.bowPurchased && Player.numOfWood >= 2)
+        {
+            Player.numOfWood -= 2;
+            Bow.ammo++;
         }
     }
     /*
