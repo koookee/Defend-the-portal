@@ -34,6 +34,9 @@ public class GameManagerUI : MonoBehaviour
     public UnityEngine.UI.Image[] slotsUI; //Image components for each hotbar slot
     public GameObject[] selectedUI; //Border around each hotbar slot. They're changed in the player controller script
 
+    //Ammo UI
+    public TextMeshProUGUI ArrowsAmmo;
+
     // Start is called before the first frame update
     void Start()
     {

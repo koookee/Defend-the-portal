@@ -25,12 +25,14 @@ public class BowScript : MonoBehaviour
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
+        GameUI.ArrowsAmmo.text = "Arrows: " + ammo;
     }
 
     // Update is called once per frame
     void Update()
     {
         Shoot();
+        AmmoDisplay();
     }
     void Shoot()
     {
@@ -56,7 +58,13 @@ public class BowScript : MonoBehaviour
                 arrow.GetComponent<ArrowScript>().damage = arrowDamage;
                 timeToWait = Time.time + 1/fireRate;
                 ammo--;
+                GameUI.ArrowsAmmo.text = "Arrows: " + ammo; //Updates the ammo UI
             }
         }
+    }
+    void AmmoDisplay()
+    {
+        if (Player.inventorySlotSelected == "Bow") GameUI.ArrowsAmmo.enabled = true;
+        else GameUI.ArrowsAmmo.enabled = false;
     }
 }

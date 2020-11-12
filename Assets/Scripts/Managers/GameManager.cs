@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         {
             Player.numOfWood -= 2;
             Bow.ammo++;
+            GameUI.ArrowsAmmo.text = "Arrows: " + Bow.ammo;
         }
     }
     /*
