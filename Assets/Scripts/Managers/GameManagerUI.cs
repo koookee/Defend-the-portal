@@ -36,6 +36,7 @@ public class GameManagerUI : MonoBehaviour
 
     //Ammo UI
     public TextMeshProUGUI ArrowsAmmo;
+    public TextMeshProUGUI BulletsAmmo;
 
     // Start is called before the first frame update
     void Start()

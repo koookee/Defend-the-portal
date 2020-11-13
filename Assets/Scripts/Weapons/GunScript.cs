@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class GunScript : MonoBehaviour
 {
     private PlayerController Player;
     private ParticleSystem Particles;
     public Camera mainCamera;
     private GameManagerUI GameUI;
+
+    public int ammo = 20;
 
     private float range = 40f;
 
@@ -20,16 +22,18 @@ public class Gun : MonoBehaviour
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
         Particles = GetComponent<ParticleSystem>();
+        GameUI.BulletsAmmo.text = "Bullets: " + ammo;
     }
 
     // Update is called once per frame
     void Update()
     {
         Shoot();
+        AmmoDisplay();
     }
     private void Shoot()
     {
-        if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Gun" && Time.time > timeToWait && !GameUI.isCraftingToggled)
+        if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Gun" && Time.time > timeToWait && !GameUI.isCraftingToggled && ammo > 0)
         {
             Particles.Play();
             RaycastHit hit;
@@ -40,8 +44,14 @@ public class Gun : MonoBehaviour
                 if (enemy != null) enemy.TakeDamage(1);
             }
             timeToWait = Time.time + 1 / fireRate;
+            ammo--;
+            GameUI.BulletsAmmo.text = "Bullets: " + ammo;
         }
-
+    }
+    void AmmoDisplay()
+    {
+        if (Player.inventorySlotSelected == "Gun") GameUI.BulletsAmmo.enabled = true;
+        else GameUI.BulletsAmmo.enabled = false;
     }
 }
 
