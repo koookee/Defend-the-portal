@@ -72,6 +72,10 @@ public class EnemyScript : MonoBehaviour
                 //If enemy is in combat range, they look at the player
                 LookAtPlayer();
                 Attack(attackSpeed,"Player");
+                //Knocks the player back when hit
+                Vector3 knockbackDirection = player.transform.position - transform.position;
+                knockbackDirection = new Vector3(knockbackDirection.x * 1.5f, 2f, knockbackDirection.z * 1.5f); //To throw the player into the air
+                player.playerRB.AddForce(knockbackDirection, ForceMode.Impulse);
             }
             else
             {

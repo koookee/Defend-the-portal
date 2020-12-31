@@ -28,12 +28,15 @@ public class GameManager : MonoBehaviour
     public void BuyWeapon(int weaponType)
     {
         //Type 0 is standard gun
-        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20)
+        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20 && Player.numOfUranium >= 2)
         {
             Player.numOfMetal -= 20;
+            Player.numOfUranium -= 2;
             //GameManagerUIScript.gunPrice.SetActive(false);
             GameUI.gunCheckmark.SetActive(true);
             GameUI.gunPurchased = true;
+            GameUI.numOfUranium.text = "Uranium: " + Player.numOfUranium;
+            GameUI.numOfMetal.text = "Metal: " + Player.numOfMetal;
             Player.inventory[Player.availableSlotNum] = "Gun";
             GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
             GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.gunSprite; //sets the image to the gun sprite
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
             //GameManagerUIScript.gunPrice.SetActive(false);
             GameUI.bowCheckmark.SetActive(true);
             GameUI.bowPurchased = true;
+            GameUI.numOfWood.text = "Wood: " + Player.numOfWood;
             Player.inventory[Player.availableSlotNum] = "Bow";
             GameUI.slotsUI[Player.availableSlotNum].enabled = true; //enables the empty slot image
             GameUI.slotsUI[Player.availableSlotNum].sprite = GameUI.bowSprite; //sets the image to the bow sprite
@@ -57,19 +61,13 @@ public class GameManager : MonoBehaviour
     }
     public void BuyAmmo(int ammoType)
     {
-        //Type 0 is bullets
-        if (ammoType == 0 && GameUI.gunPurchased && Player.numOfMetal >= 1)
-        {
-            Player.numOfMetal -= 1;
-            Gun.ammo++;
-            GameUI.BulletsAmmo.text = "Bullets: " + Gun.ammo;
-        }
-        //Type 1 is arrows
-        if (ammoType == 1 && GameUI.bowPurchased && Player.numOfWood >= 2)
+        //Type 0 is arrows
+        if (ammoType == 0 && GameUI.bowPurchased && Player.numOfWood >= 2)
         {
             Player.numOfWood -= 2;
             Bow.ammo++;
             GameUI.ArrowsAmmo.text = "Arrows: " + Bow.ammo;
+            GameUI.numOfWood.text = "Wood: " + Player.numOfWood;
         }
     }
     /*

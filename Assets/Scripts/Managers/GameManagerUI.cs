@@ -36,7 +36,13 @@ public class GameManagerUI : MonoBehaviour
 
     //Ammo UI
     public TextMeshProUGUI ArrowsAmmo;
-    public TextMeshProUGUI BulletsAmmo;
+    //public TextMeshProUGUI BulletsAmmo; Change this to gun upgrade or something
+
+    //Resources UI
+    public TextMeshProUGUI numOfWood;
+    public TextMeshProUGUI numOfRocks;
+    public TextMeshProUGUI numOfMetal;
+    public TextMeshProUGUI numOfUranium;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +55,7 @@ public class GameManagerUI : MonoBehaviour
         slotsUI[2].enabled = false;
         slotsUI[3].enabled = false;
         slotsUI[4].enabled = false;
+        ResourcesUI();
     }
     public void ToggleCraftingUI()
     {
@@ -80,6 +87,15 @@ public class GameManagerUI : MonoBehaviour
         {
             
         }
+    }
+    private void ResourcesUI()
+    {
+        numOfWood.text = "Wood: " + Player.numOfWood;
+        numOfRocks.text = "Rocks: " + Player.numOfRocks;
+        numOfMetal.text = "Metal: " + Player.numOfMetal;
+        numOfUranium.text = "Uranium: " + Player.numOfUranium;
+        //ResourcesUI updates in the player controller script 
+        //Uranium UI updates in the WorldObject script
     }
 
     /*

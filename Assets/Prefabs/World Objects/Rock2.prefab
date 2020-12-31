@@ -127,5 +127,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Rock
-  type: Stone
+  type: Rocks
   health: 8

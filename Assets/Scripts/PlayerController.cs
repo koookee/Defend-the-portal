@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
 {
     private GameManagerUI GameUI;
     public Camera mainCamera;
-    private Rigidbody playerRB;
-    public int numOfStones = 900; //Change to 0
+    public Rigidbody playerRB;
+    public int numOfRocks = 900; //Change to 0
     public int numOfWood = 900; //Change to 0
     public int numOfMetal = 900; //Change to 0
+    public int numOfUranium = 10; //Change to 0
     private float playerSpeed = 3.0f;
     private float jumpForce = 4.0f;
     public int numOfJumps = 2;
@@ -78,20 +79,20 @@ public class PlayerController : MonoBehaviour
                 {
                     switch (worldObject.type)
                     {
-                        case ("Stone"):
+                        case ("Rocks"):
                             worldObject.TakeDamage();
-                            numOfStones++;
-                            Debug.Log("Stones: " + numOfStones);
+                            numOfRocks++;
+                            GameUI.numOfRocks.text = "Rocks: " + numOfRocks;
                             break;
                         case ("Wood"):
                             worldObject.TakeDamage();
                             numOfWood++;
-                            Debug.Log("Wood: " + numOfWood);
+                            GameUI.numOfWood.text = "Wood: " + numOfWood;
                             break;
                         case ("Metal"):
                             worldObject.TakeDamage();
                             numOfMetal++;
-                            Debug.Log("Metal: " + numOfMetal);
+                            GameUI.numOfMetal.text = "Metal: " + numOfMetal;
                             break;
                         default:
                             Debug.Log("Can't find object type");
