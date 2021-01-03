@@ -6,7 +6,8 @@ public class PortalScript : MonoBehaviour
 {
     private GameManagerUI GameUI;
     public int health = 100;
-    private int repulsiveForce = 20;
+    private int repulsiveForce = 200;
+    private int paralyzingTime = 5; // Time in seconds
     private int damage = 1; //Damage applied by the repulsive force
     PlayerController Player;
     // Start is called before the first frame update
@@ -32,6 +33,7 @@ public class PortalScript : MonoBehaviour
     }
     public void RepelEnemies()
     {
+        bool repelledEnemy = false;
         GameObject[] enemyArr = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyArr)
         {
@@ -40,13 +42,25 @@ public class PortalScript : MonoBehaviour
             //Only knocks back the enemies that are close to the portal
             if (Vector3.Distance(enemyScript.transform.position, transform.position) < 5f)
             {
+                repelledEnemy = true;
+                //enemyScript.enemyRb.isKinematic = false; //Remember to turn this back on
                 forceDirection.x *= repulsiveForce;
                 forceDirection.z *= repulsiveForce;
                 enemyScript.enemyRb.AddForce(forceDirection, ForceMode.Impulse);
                 enemyScript.TakeDamage(damage);
+                StartCoroutine(ParalyzeEnemy(enemyScript, enemyScript.agent.speed));
             }
         }
-        Player.numOfUranium--; //Ability uses up 1 uranium
-        GameUI.numOfUranium.text = "Uranium: " + Player.numOfUranium;
+        if (repelledEnemy) //If no enemies were repelled, uranium is not used up
+        {
+            Player.numOfUranium--; //Ability uses up 1 uranium
+            GameUI.numOfUranium.text = "Uranium: " + Player.numOfUranium;
+        }
+    }
+    private IEnumerator ParalyzeEnemy(EnemyScript enemy, float originalSpeed)
+    {
+        enemy.agent.speed = 0;
+        yield return new WaitForSeconds(paralyzingTime);
+        enemy.agent.speed = originalSpeed;
     }
 }
