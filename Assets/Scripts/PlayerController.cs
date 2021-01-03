@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private GameManagerUI GameUI;
+    PortalScript Portal;
     public Camera mainCamera;
     public Rigidbody playerRB;
     public int numOfRocks = 900; //Change to 0
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //GameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Portal = GameObject.Find("Portal").GetComponent<PortalScript>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
         inventorySlotSelected = inventory[inventorySlotNum];
         playerRB = GetComponent<Rigidbody>();
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
         CheckPlayerHealth();
         HarvestingFunc();
         ToggleCraftingUI();
+        Abilities();
     }
 
 
@@ -193,5 +196,11 @@ public class PlayerController : MonoBehaviour
             GameUI.ToggleCraftingUI();
         }
     }
-
+    private void Abilities()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && numOfUranium > 0)
+        {
+            Portal.RepelEnemies();
+        }
+    }
 }

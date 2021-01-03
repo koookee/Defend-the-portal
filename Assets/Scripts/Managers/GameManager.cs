@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private PlayerController Player;
     private BowScript Bow;
     private GunScript Gun;
+    private PortalScript Portal;
     public int numEnemiesTargetingPlayer; // The number of enemies targeting the player
     public int maxNumEnemiesTargetingPlayer = 3; //Maximum number of enemies that should target the player
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
+        Portal = GameObject.Find("Portal").GetComponent<PortalScript>();
         Bow = GameObject.Find("Bow").GetComponent<BowScript>();
         Gun = GameObject.Find("Raygun").GetComponent<GunScript>();
     }
@@ -25,10 +27,10 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    public void BuyWeapon(int weaponType)
+    public void CraftWeapon(int weaponType)
     {
         //Type 0 is standard gun
-        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20 && Player.numOfUranium >= 2)
+        if (weaponType == 0 && !GameUI.gunPurchased && Player.numOfMetal >= 20 && Player.numOfUranium >= 2 && Portal.PlayerInRange())
         {
             Player.numOfMetal -= 20;
             Player.numOfUranium -= 2;
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
             //Potential bug: Function doesn't check if availableSlotNum reached its max (4)
         }
     }
-    public void BuyAmmo(int ammoType)
+    public void CraftAmmo(int ammoType)
     {
         //Type 0 is arrows
         if (ammoType == 0 && GameUI.bowPurchased && Player.numOfWood >= 2)

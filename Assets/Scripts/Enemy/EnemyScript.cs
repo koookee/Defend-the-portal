@@ -6,10 +6,11 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private PlayerController player;
     private PortalScript portal;
     private GameManager GameManagerScript;
+    public Rigidbody enemyRb;
     private int health = 5;
     private float detectionRange = 999f; //Detection range is the entire map
     private float attackRange; //attack range is dependant on the stopping distance
@@ -22,6 +23,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         portal = GameObject.Find("Portal").GetComponent<PortalScript>();
         GameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();

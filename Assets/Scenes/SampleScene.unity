@@ -429,6 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ffa52d2c317a646b2226bf11020890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  enemyRb: {fileID: 0}
 --- !u!1 &82414654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1533,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 20244610}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BuyWeapon
+        m_MethodName: CraftWeapon
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3004,7 +3006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 20244610}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BuyAmmo
+        m_MethodName: CraftAmmo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3160,6 +3162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ffa52d2c317a646b2226bf11020890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  enemyRb: {fileID: 0}
 --- !u!1 &938919175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,7 +3807,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 20244610}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BuyWeapon
+        m_MethodName: CraftWeapon
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4406,7 +4410,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 20244610}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BuyAmmo
+        m_MethodName: CraftAmmo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4840,6 +4844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ffa52d2c317a646b2226bf11020890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  enemyRb: {fileID: 0}
 --- !u!1 &1507906052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5625,6 +5631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ffa52d2c317a646b2226bf11020890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  enemyRb: {fileID: 0}
 --- !u!1 &1988089210
 GameObject:
   m_ObjectHideFlags: 0
@@ -7009,25 +7017,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3427101945309708116, guid: eeb461ce0605f2345ae6c29d279ee134,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3427101945309708117, guid: eeb461ce0605f2345ae6c29d279ee134,
         type: 3}
       propertyPath: m_Name
       value: Enemy1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427101945309708117, guid: eeb461ce0605f2345ae6c29d279ee134,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427101945309708118, guid: eeb461ce0605f2345ae6c29d279ee134,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeb461ce0605f2345ae6c29d279ee134, type: 3}

@@ -21,8 +21,8 @@ public class GunScript : MonoBehaviour
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
-       // Particles = GetComponent<ParticleSystem>();
-       // GameUI.BulletsAmmo.text = "Bullets: " + ammo;
+        // Particles = GetComponent<ParticleSystem>();
+        // GameUI.BulletsAmmo.text = "Bullets: " + ammo;
     }
 
     // Update is called once per frame
@@ -36,12 +36,18 @@ public class GunScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Player.inventorySlotSelected == "Gun" && Time.time > timeToWait && !GameUI.isCraftingToggled)
         {
             //Particles.Play();
-            RaycastHit hit;
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range))
+            int numOfHits = 0; //Can go through a max of 3 targets
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(mainCamera.transform.position, mainCamera.transform.forward, range);
+            for (int i = 0; i < hits.Length && numOfHits < 3; i++)
             {
+                RaycastHit hit = hits[i];
                 EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
-                //Checks to see if the gameobject is an enemy has EnemyScript as a component
-                if (enemy != null) enemy.TakeDamage(50);
+                if (enemy) //Checks if enemy is true or NULL (false)
+                {
+                    enemy.TakeDamage(50); 
+                    numOfHits++;
+                }
             }
             timeToWait = Time.time + cooldown;
             //ammo--;
