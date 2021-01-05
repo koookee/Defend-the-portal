@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AmmoShortcut();
     }
     public void CraftWeapon(int weaponType)
     {
@@ -70,6 +70,13 @@ public class GameManager : MonoBehaviour
             Bow.ammo++;
             GameUI.ArrowsAmmo.text = "Arrows: " + Bow.ammo;
             GameUI.numOfWood.text = "Wood: " + Player.numOfWood;
+        }
+    }
+    private void AmmoShortcut()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (Player.inventorySlotSelected == "Bow") CraftAmmo(0);
         }
     }
     /*

@@ -43,12 +43,13 @@ public class PortalScript : MonoBehaviour
             if (Vector3.Distance(enemyScript.transform.position, transform.position) < 5f)
             {
                 repelledEnemy = true;
-                //enemyScript.enemyRb.isKinematic = false; //Remember to turn this back on
+                enemyScript.enemyRb.isKinematic = false; //Remember to turn this back on
                 forceDirection.x *= repulsiveForce;
                 forceDirection.z *= repulsiveForce;
                 enemyScript.enemyRb.AddForce(forceDirection, ForceMode.Impulse);
                 enemyScript.TakeDamage(damage);
-                StartCoroutine(ParalyzeEnemy(enemyScript, enemyScript.agent.speed));
+                //Checks if the enemy is still alive
+                if(enemyScript.health>0) StartCoroutine(ParalyzeEnemy(enemyScript, enemyScript.agent.speed));
             }
         }
         if (repelledEnemy) //If no enemies were repelled, uranium is not used up
@@ -61,6 +62,10 @@ public class PortalScript : MonoBehaviour
     {
         enemy.agent.speed = 0;
         yield return new WaitForSeconds(paralyzingTime);
-        enemy.agent.speed = originalSpeed;
+        if (enemy.health > 0)
+        {
+            enemy.agent.speed = originalSpeed;
+            enemy.enemyRb.isKinematic = true;
+        }
     }
 }

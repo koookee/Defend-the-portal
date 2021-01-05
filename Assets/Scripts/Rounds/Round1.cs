@@ -5,6 +5,7 @@ using UnityEngine;
 public class Round1 : MonoBehaviour
 {
     private SpawnManager SpawnManagerScript;
+    int enemy1 = 0;
     public int timeBeforeRoundStarts = 5;
     private bool allEnemiesSpawned = false;
     public int roundNum;
@@ -41,8 +42,7 @@ public class Round1 : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeRoundStarts);
 
-        int enemy1 = 0;
-        SpawnManagerScript.EnemySpawner(enemy1, 2);
+        SpawnManagerScript.EnemySpawner(enemy1, 2); 
         yield return new WaitForSeconds(15);
         SpawnManagerScript.EnemySpawner(enemy1, 3);
         yield return new WaitForSeconds(15);

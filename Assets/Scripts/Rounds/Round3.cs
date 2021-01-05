@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Round2 : MonoBehaviour
+public class Round3 : MonoBehaviour
 {
     private SpawnManager SpawnManagerScript;
     int enemy1 = 0;
+    int enemy2 = 1;
     public int timeBeforeRoundStarts = 5;
     private bool allEnemiesSpawned = false;
     public int roundNum;
     //If copying script, only change RoundX below and in update function
-    private Round3 nextRound; //Change to round 3
+    private Round3 nextRound; //Change to round 4
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class Round2 : MonoBehaviour
             //Stops the if condition from being executed if the roundCounter gets incremented
             if (enemyArr.Length == 0 && roundNum == SpawnManagerScript.roundCounter)
             {
-                nextRound = GetComponent<Round3>(); //Change to round 3
+                nextRound = GetComponent<Round3>(); //Change to round 4
                 SpawnManagerScript.roundCounter++;
                 nextRound.enabled = true;
                 //Turns off script when round is over
@@ -41,14 +42,14 @@ public class Round2 : MonoBehaviour
     private IEnumerator Spawner()
     {
         yield return new WaitForSeconds(timeBeforeRoundStarts);
-        
-        SpawnManagerScript.EnemySpawner(enemy1, 1);
+
+        SpawnManagerScript.EnemySpawner(enemy2, 1);
         yield return new WaitForSeconds(10);
-        SpawnManagerScript.EnemySpawner(enemy1, 10);
+        SpawnManagerScript.EnemySpawner(enemy1, 15);
         yield return new WaitForSeconds(20);
-        SpawnManagerScript.EnemySpawner(enemy1, 3);
+        SpawnManagerScript.EnemySpawner(enemy2, 1);
         yield return new WaitForSeconds(20);
-        SpawnManagerScript.EnemySpawner(enemy1, 3);
+        SpawnManagerScript.EnemySpawner(enemy1, 5);
 
         allEnemiesSpawned = true;
     }

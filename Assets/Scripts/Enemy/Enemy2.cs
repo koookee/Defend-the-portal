@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Enemy1 : MonoBehaviour
+public class Enemy2 : MonoBehaviour
 {
     private PlayerController player;
-    private int damage = 1;
+    private int damage = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +15,7 @@ public class Enemy1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void DamagePlayer()
     {

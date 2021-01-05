@@ -11,13 +11,16 @@ public class EnemyScript : MonoBehaviour
     private PortalScript portal;
     private GameManager GameManagerScript;
     public Rigidbody enemyRb;
-    private int health = 5;
+    public bool isEnemy1;
+    public bool isEnemy2;
+    public int health;
+    public int damage;
     private float detectionRange = 999f; //Detection range is the entire map
     private float attackRange; //attack range is dependant on the stopping distance
     private bool isAlive = true;
     private float attackSpeed = 1f; //1 attacks per second
     private float attackCooldown = 0f; //Updates with Time.time
-    private bool shouldTargetPlayer = false;
+    public bool shouldTargetPlayer = false; //Made it public so that I can set it to true for the enemy boss
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +51,8 @@ public class EnemyScript : MonoBehaviour
         {
             isAlive = false;
             //If enemy is currently targeting player and they die, it decrements number of enemies targeting player
-            if (shouldTargetPlayer) GameManagerScript.numEnemiesTargetingPlayer--; 
+            //If Enemy2 (boss) dies, numEnemiesTargetingPlayer should stay the same
+            if (shouldTargetPlayer && !isEnemy2) GameManagerScript.numEnemiesTargetingPlayer--; 
             Destroy(gameObject);
         }
     }
@@ -81,7 +85,6 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {
-                //If player is not in range, enemy will target portal
                 agent.SetDestination(portal.transform.position);
                 if (distanceToPortal <= attackRange)
                 {
@@ -103,11 +106,10 @@ public class EnemyScript : MonoBehaviour
         //Wait until animation is over to do damage
         if (Time.time > attackCooldown)
         {
-            if (objectToAttack == "Player") player.health--;
-            else portal.health--;
+            if (objectToAttack == "Player") player.health-= damage;
+            else portal.health-= damage;
             attackCooldown = Time.time + 1 / attackSpeed;
         }
-
     }
     private void ShouldTargetPlayer()
         //Checks if the enemy should target the player or go straight to the portal

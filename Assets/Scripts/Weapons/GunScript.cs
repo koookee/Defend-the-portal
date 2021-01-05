@@ -9,7 +9,7 @@ public class GunScript : MonoBehaviour
     public Camera mainCamera;
     private GameManagerUI GameUI;
 
-    //public int ammo = 20;
+    private int damage = 10;
 
     private float range = 40f;
 
@@ -45,7 +45,7 @@ public class GunScript : MonoBehaviour
                 EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
                 if (enemy) //Checks if enemy is true or NULL (false)
                 {
-                    enemy.TakeDamage(50); 
+                    enemy.TakeDamage(damage); 
                     numOfHits++;
                 }
             }
