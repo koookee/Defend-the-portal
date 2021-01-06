@@ -36,13 +36,16 @@ public class GameManagerUI : MonoBehaviour
 
     //Ammo UI
     public TextMeshProUGUI ArrowsAmmo;
-    //public TextMeshProUGUI BulletsAmmo; Change this to gun upgrade or something
+    //public TextMeshProUGUI BulletsAmmo;
 
     //Resources UI
     public TextMeshProUGUI numOfWood;
     public TextMeshProUGUI numOfRocks;
     public TextMeshProUGUI numOfMetal;
     public TextMeshProUGUI numOfUranium;
+
+    //Cooldown UI
+    public TextMeshProUGUI GunCooldown;
 
     // Start is called before the first frame update
     void Start()

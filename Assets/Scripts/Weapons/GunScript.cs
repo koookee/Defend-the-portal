@@ -15,6 +15,7 @@ public class GunScript : MonoBehaviour
 
     private float cooldown = 10f; //Time to wait in seconds to shoot another ray
     private float timeToWait = 0f; //Time before player can shoot again. Starts at 0 but constantly changes. 
+    private float cooldownTimerUI = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,14 +51,20 @@ public class GunScript : MonoBehaviour
                 }
             }
             timeToWait = Time.time + cooldown;
-            //ammo--;
-            //GameUI.BulletsAmmo.text = "Bullets: " + ammo;
+            cooldownTimerUI = 10f;
         }
     }
     void CooldownDisplay()
     {
-        //if (Player.inventorySlotSelected == "Gun") GameUI.BulletsAmmo.enabled = true;
-        //else GameUI.BulletsAmmo.enabled = false;
+        if (Player.inventorySlotSelected == "Gun") GameUI.GunCooldown.enabled = true;
+        else GameUI.GunCooldown.enabled = false;
+
+        if (cooldownTimerUI > 0)
+        {
+            cooldownTimerUI -= Time.deltaTime;
+            GameUI.GunCooldown.text = "Cooldown: " + Mathf.Ceil(cooldownTimerUI);
+        }
+        else GameUI.GunCooldown.text = "Cooldown: Ready";
     }
 }
 

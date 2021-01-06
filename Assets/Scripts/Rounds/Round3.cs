@@ -44,9 +44,9 @@ public class Round3 : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeRoundStarts);
 
         SpawnManagerScript.EnemySpawner(enemy2, 1);
-        yield return new WaitForSeconds(10);
-        SpawnManagerScript.EnemySpawner(enemy1, 15);
         yield return new WaitForSeconds(20);
+        SpawnManagerScript.EnemySpawner(enemy1, 15);
+        yield return new WaitForSeconds(30);
         SpawnManagerScript.EnemySpawner(enemy2, 1);
         yield return new WaitForSeconds(20);
         SpawnManagerScript.EnemySpawner(enemy1, 5);
