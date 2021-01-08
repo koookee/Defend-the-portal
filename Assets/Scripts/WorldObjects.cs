@@ -11,8 +11,8 @@ public class WorldObjects : MonoBehaviour
     public string type; //Metal, wood, rocks
     public int health;
     private int rareResourceChanceWood = 2; // 2% chance of dropping a rare resource after destorying wood type material
-    private int rareResourceChanceRocks = 4; // 4% chance of dropping a rare resource after destorying rocks type material
-    private int rareResourceChanceMetal = 10; // 10% chance of dropping a rare resource after destorying metal type material
+    private int rareResourceChanceRocks = 15; // 15% chance of dropping a rare resource after destorying rocks type material
+    private int rareResourceChanceMetal = 4; // 4% chance of dropping a rare resource after destorying metal type material
     // Start is called before the first frame update
     void Start()
     {
