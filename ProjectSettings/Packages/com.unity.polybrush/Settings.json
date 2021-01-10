@@ -64,6 +64,11 @@
                 "value": "{\"m_Value\":true}"
             },
             {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "Mesh.RebuildNormals",
+                "value": "{\"m_Value\":true}"
+            },
+            {
                 "type": "UnityEngine.Polybrush.BrushMirror, Unity.Polybrush, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "Brush.MirrorAxis",
                 "value": "{\"m_Value\":0}"
@@ -89,9 +94,14 @@
                 "value": "{\"m_Value\":5.0}"
             },
             {
+                "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "Brush.VertexBillboardSize",
+                "value": "{\"m_Value\":2.0}"
+            },
+            {
                 "type": "UnityEditor.Polybrush.PrefabLoadout, Unity.Polybrush.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ScatteringEditor.userLoadout",
-                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":174192971133972698,\"guid\":\"123c9372cb7db734d8ce482125abd8f0\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":4550399974109067467,\"guid\":\"6cf25f872c20d9b4aaeefaca1f8e851d\",\"type\":3}}]}}"
+                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":4455326453388054218,\"guid\":\"f01a23ea9f33e2a4ea55f64fea81be2b\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":8225101113041820513,\"guid\":\"f471dfa0774c1274fbb030e08a901e88\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":5590039899519304920,\"guid\":\"55eff661baf23634ab9e4b20f35ecf6f\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"0eea0861a75863643bbe0a2906be7dfb\",\"type\":2},\"prefab\":{\"fileID\":2611997445845030044,\"guid\":\"38510eb741ec48d4ab40059175ad7669\",\"type\":3}}]}}"
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
