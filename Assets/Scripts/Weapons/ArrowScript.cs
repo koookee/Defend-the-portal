@@ -17,11 +17,11 @@ public class ArrowScript : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
             Destroy(gameObject);
         }
         else

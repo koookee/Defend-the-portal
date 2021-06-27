@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
     }
     private void HotbarScrollWheel() //Moves between slots using scroll wheel
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f && inventorySlotNum < inventory.Length - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f && inventorySlotNum < inventory.Length - 1)
         {
             previousInventorySlotNum = inventorySlotNum;
             inventorySlotNum++;
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
             GameUI.selectedUI[previousInventorySlotNum].SetActive(false); //Turns off the border of the previously selected slot
             previousInventorySlotNum = inventorySlotNum;
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f && inventorySlotNum > 0)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && inventorySlotNum > 0)
         {
             previousInventorySlotNum = inventorySlotNum;
             inventorySlotNum--;
