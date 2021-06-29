@@ -26,7 +26,7 @@ public class CameraScript : MonoBehaviour
             horizontalRotation += Input.GetAxis("Mouse X") * rotationSpeed;
             verticalRotation -= Input.GetAxis("Mouse Y") * rotationSpeed;
             //Limits the player's vertical rotation
-            verticalRotation = Mathf.Clamp(verticalRotation, -23, 12);
+            verticalRotation = Mathf.Clamp(verticalRotation, -40, 40);
             transform.LookAt(Target);
             //Rotates camera and target up and down
             Target.rotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);

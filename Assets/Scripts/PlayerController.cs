@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     PortalScript Portal;
     public Camera mainCamera;
     public Rigidbody playerRB;
+    public Animator anim;
     public int numOfRocks = 900; //Change to 0
     public int numOfWood = 900; //Change to 0
     public int numOfMetal = 900; //Change to 0
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         GameUI = GameObject.Find("GameManagerUI").GetComponent<GameManagerUI>();
         inventorySlotSelected = inventory[inventorySlotNum];
         playerRB = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -126,6 +128,10 @@ public class PlayerController : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             float horizontal = Input.GetAxis("Horizontal");
             Vector3 playerMovement = new Vector3(horizontal, 0, vertical).normalized * playerSpeed * Time.deltaTime;
+            if (playerMovement.magnitude > 0 && Input.GetKey(KeyCode.W)) anim.SetBool("isRunningForward", true);
+            else anim.SetBool("isRunningForward", false);
+            if (playerMovement.magnitude > 0 && Input.GetKey(KeyCode.S)) anim.SetBool("isRunningBackward", true);
+            else anim.SetBool("isRunningBackward", false);
             ////normalized prevents player at moving at twice the speed diagonally 
             transform.Translate(playerMovement, Space.Self);
             //playerRB.AddForce(playerMovement * 5,ForceMode.VelocityChange);
